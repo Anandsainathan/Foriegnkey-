@@ -1,0 +1,118 @@
+{% extends 'nav.html' %}
+{% block content %}
+<style>
+    body {
+        text-align: center;
+        background-color: #343a40;
+        color: #2e96e0;
+        font-family: Verdana, sans-serif;
+    }
+    .container {
+        padding: 50px;
+        max-width: 80%;
+        margin: 0 auto;
+        background-color: #495057;
+        border-radius: 5%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1s ease;
+    }
+    h1 {
+        text-align: center;
+        color: blue;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        border: 5px solid #ccc;
+        border-radius: 5%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    td {
+        background-color: #f2f2f2;
+    }
+    th {
+        background-color: #9b9b9b;
+    }
+    a {
+        text-decoration: none;
+    }
+    a.edit-link, a.delete-link {
+        color: green;
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    a.delete-link {
+        color: red;
+    }
+    a.edit-link:hover, a.delete-link:hover {
+        background-color: transparent;
+        color: white;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    input[type="submit"] {
+        background-color: transparent;
+        color: red;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: red;
+        color: white;
+    }
+
+    /* Slide-in animation */
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+<div class="container">
+    <h1>Student Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Joining Date</th>
+                <th>Course</th>
+                <th>Course Fee</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.J_date }}</td>
+                <td>{{ student.course.Course }}</td>
+                <td>{{ student.course.Fee }}</td>
+                <td>
+                    <a href="{% url 'edit_student' student.id %}" class="edit-link">Edit</a>
+                    <a href="{% url 'delete' student.id %}" class="delete-link">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

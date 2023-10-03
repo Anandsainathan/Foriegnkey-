@@ -1,0 +1,16 @@
+{% extends 'nav.html' %}
+{% block content %}
+<form method="post" action="{% url 'coursedb' %}"  class="container my-5 custom-form">
+    {% csrf_token %}
+    <h1 class="mb-4">Add Course</h1>
+    <div class="form-group">
+        <label for="course">Course Name:</label>
+        <input type="text" class="form-control" id="course" name="course" placeholder="Enter Course">
+    </div>
+    <div class="form-group">
+        <label for="fee">Course Fee:</label>
+        <input type="number" class="form-control" id="fee" name="fee" placeholder="Enter Course Fee">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+{% endblock %}

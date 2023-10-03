@@ -1,0 +1,73 @@
+{% extends 'nav.html' %}
+{% block content %}
+<style>
+    body {
+        text-align: center;
+        background-color: #343a40;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 400px;
+        margin: 0 auto; 
+        padding: 20px; 
+        background-color: #495057;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        animation: slideIn 1s ease;
+    }
+    h1 {
+        color: #17a2b8;
+    }
+    input, select, button {
+        width: 100%;
+        padding: 10px; 
+        margin-bottom: 15px;
+        background-color: #6c757d;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+    }
+    input:focus, select:focus {
+        background-color: #5a6268;
+    }
+    button {
+        width: 100%; 
+        padding: 10px;
+        background-color: #17a2b8;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #138496;
+    }
+
+    /* Slide-in animation */
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+<div class="container">
+    <h1>Add Student</h1>
+    <form method="post" action="{% url 'add_student' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter name" name="name"><br>
+        <input type="text" placeholder="Enter Address" name="address"><br>
+        <input type="number" placeholder="Enter Age" name="age"><br>
+        <input type="date" name="joining_date"><br>
+        <select id="course" name="course">
+            <option value="Select" selected>Select Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.Course }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
